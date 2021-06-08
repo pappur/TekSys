@@ -8,6 +8,6 @@ object Main {
         val servicesProvided = ServicesProvided()
         servicesProvided.getUserInput()
         servicesProvided.calculateDiscountedPrice()
-        Channel.subscribe {tranEvent: TransactionEvent -> println("transaction ${tranEvent.message}")  }
+        KotlinConsumer.processMessage()
     }
 }

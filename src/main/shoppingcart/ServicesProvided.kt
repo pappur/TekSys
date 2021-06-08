@@ -4,22 +4,6 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.function.Consumer
 import java.util.stream.Collectors
-import kotlin.reflect.KClass
-
-object Channel {
-
-    val subscribers: MutableMap<KClass<*>, (Any) -> Unit> = mutableMapOf()
-
-    inline fun <reified T> publish(event: T) {
-        subscribers[T::class]?.invoke(event as Any)
-    }
-
-    inline fun <reified T> subscribe(noinline subscriber: (T) -> Unit) {
-        subscribers[T::class] = subscriber as (Any) -> Unit
-    }
-
-}
-
 
 class ServicesProvided {
     var cart = Cart()
@@ -33,7 +17,7 @@ class ServicesProvided {
     }
 
     fun calculateDiscountedPrice(): Double {
-        Channel.publish(TransactionEvent("Success", cart.calculateDiscountedCartItemPrice()))
+        KotlinProducer.send("success")
         return cart.calculateDiscountedCartItemPrice()
     }
 
