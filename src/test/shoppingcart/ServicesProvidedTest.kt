@@ -13,4 +13,10 @@ internal class ServicesProvidedTest {
         servicesProvided.addProductToCart(userInput as MutableList<String>)
         assertEquals(servicesProvided.calculatePrice(),2.05)
     }
+    @Test
+    fun `The discounted price for user input items is calculated properly` () {
+        val userInput = listOf("apple", "apple", "orange", "orange")
+        servicesProvided.addProductToCart(userInput as MutableList<String>)
+        assertEquals(servicesProvided.calculateDiscountedPrice(),1.1)
+    }
 }

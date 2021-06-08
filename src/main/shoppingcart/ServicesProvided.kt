@@ -16,7 +16,12 @@ class ServicesProvided {
         userInput.forEach(Consumer { temp: String? -> cart.addProductToCartByName(temp!!) })
     }
 
+    fun calculateDiscountedPrice(): Double {
+        return cart.calculateDiscountedCartItemPrice()
+    }
+
     fun calculatePrice(): Double {
         return cart.calculateCartItemPrice()
     }
 }
+
