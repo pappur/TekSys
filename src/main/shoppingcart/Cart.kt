@@ -28,6 +28,12 @@ class Cart {
         cartItems.add(product)
     }
 
+    fun printCartItems() {
+        for (prod in cartItems) {
+            println(prod!!.name)
+        }
+    }
+
     fun calculateCartItemPrice(): Double {
         for (prod in cartItems) {
             totalPrice += prod!!.price
@@ -47,12 +53,20 @@ class Cart {
         }
         for (prod in prodCount) {
             val product = getProductByProductName(prod.key)
+            if (product != null) {
+                if (prod.value < product.quantity) {
+
+
                     val deduction = prod.value / (product?.minCount ?: 0) * product?.price!!
                     if (deduction != null) {
                         totalDiscountedPrice += deduction
                     }
                     product.quantity = product.quantity - prod.value
+                } else {
+                    System.out.println("ordered item is out of stock")
                 }
+            }
+        }
         return totalWithNoDiscount - totalDiscountedPrice
     }
 }
