@@ -7,6 +7,7 @@ object Main {
     fun main(args: Array<String>) {
         val servicesProvided = ServicesProvided()
         servicesProvided.getUserInput()
-        println("total discounted price is $"+ servicesProvided.calculateDiscountedPrice())
+        servicesProvided.calculateDiscountedPrice()
+        Channel.subscribe {tranEvent: TransactionEvent -> println("transaction ${tranEvent.message}")  }
     }
 }
